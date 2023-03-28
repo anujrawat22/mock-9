@@ -48,7 +48,7 @@ const mailOptions = {
   to: email,
   subject: 'Verification of email',
   text:   `Hello ${name},
-  Please verify your email by clicking on this link - http://localhost:8080/user/verify/${user._id}`
+  Please verify your email by clicking on this link - https://erin-clean-chicken.cyclic.app/user/verify/${user._id}`
 };
 
 transporter.sendMail(mailOptions, function(error, info){
@@ -120,7 +120,7 @@ exports.verify = async (req, res) => {
     
     const user = await UserModel.findByIdAndUpdate(id,{verified : true})
     
-    res.redirect("http://127.0.0.1:5500/frontend/login.html")
+    res.redirect("https://playful-parfait-f5778a.netlify.app/frontend/login.html")
   }catch(err){
     console.log(err)
     res.status(500).send({Error : "Something went wrong"})
