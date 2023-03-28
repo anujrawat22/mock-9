@@ -6,8 +6,7 @@ const { authenticate } = require("./middleware/authenticate");
 const { MessageRouter } = require("./routes/message.route");
 
 require("dotenv").config();
-const io = require("socket.io")(8000);
-const users = {}
+
 
 const app = express();
 
@@ -19,16 +18,7 @@ app.use("/user", UserRouter);
 
 app.use("/message", authenticate,MessageRouter)
 
-io.on('connection',socket =>{
-    socket.on('new-user-joined',name =>{
-        users[socket.id] = name;
-        socket.brodcast.emit('user-joined',name)
-    })
 
-    socket.on('send',message =>{
-        socket.brodcast.emit('receive' , {message : message, name : users[socket.id]})
-    })
-})
 
 
 
